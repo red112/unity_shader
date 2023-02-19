@@ -41,7 +41,7 @@ Shader "Custom/NewSurfaceShader"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-            o.Albedo = float3(1,0,0);
+            o.Albedo = c.rgb;
             o.Alpha = c.a;
         }
         ENDCG
