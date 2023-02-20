@@ -10,11 +10,14 @@ Shader "Custom/NewSurfaceShader"
     SubShader
     {
         Tags { "RenderType"="Opaque" }
+        //Tags { "RenderType"="Transparent" "Queue"="Transparent"}
         LOD 200
 
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
-        #pragma surface surf Standard fullforwardshadows
+        // #pragma surface surf Standard fullforwardshadows
+       #pragma surface surf Standard 
+        //#pragma surface surf Standard alpha:fade
 
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
@@ -41,8 +44,9 @@ Shader "Custom/NewSurfaceShader"
         {
             // Albedo comes from a texture tinted by color
             fixed4 c = tex2D (_MainTex, IN.uv_MainTex) * _Color;
-            o.Albedo = c.rgb;
-            o.Alpha = c.a;
+            //o.Albedo = _Color.rgb;
+            o.Albedo = (c.r + c.g + c.b)/3.0;
+            //o.Alpha = 0.5;
         }
         ENDCG
     }
